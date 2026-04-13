@@ -1,0 +1,112 @@
+.lectures-page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 80px;
+}
+
+.filters-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.category-tab {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid #EBEBEB;
+  background: white;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-tab:hover {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.category-tab.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+.sort-select-wrap {
+  flex-shrink: 0;
+}
+
+.sort-select {
+  padding: 10px 14px;
+  border: 1.5px solid #EBEBEB;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--black);
+  background: white;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.sort-select:focus {
+  border-color: var(--orange);
+}
+
+.lectures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 40px;
+}
+
+.page-btn {
+  padding: 8px 14px;
+  border: 1.5px solid #EBEBEB;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  background: white;
+  color: var(--black);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.page-btn.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

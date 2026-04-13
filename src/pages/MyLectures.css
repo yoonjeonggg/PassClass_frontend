@@ -1,0 +1,73 @@
+.my-lectures-page {
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+.enrollment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.enrollment-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: white;
+  border: 1px solid #EBEBEB;
+  border-radius: var(--radius);
+  transition: all 0.2s;
+}
+
+.enrollment-item:hover {
+  box-shadow: var(--shadow);
+  border-color: #D0D0D0;
+}
+
+.enrollment-icon {
+  font-size: 32px;
+  width: 56px;
+  height: 56px;
+  background: var(--orange-dim);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.enrollment-info {
+  flex: 1;
+}
+
+.enrollment-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--black);
+}
+
+.enrollment-date {
+  font-size: 13px;
+  color: var(--gray-400);
+}
+
+.enrollment-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.cancel-btn:hover {
+  background: #FEF2F2 !important;
+}
+
+@media (max-width: 640px) {
+  .enrollment-item {
+    flex-wrap: wrap;
+  }
+  .enrollment-actions {
+    width: 100%;
+  }
+}
