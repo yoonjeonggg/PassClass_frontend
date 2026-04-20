@@ -8,6 +8,9 @@ import type {
   LectureRequest, LectureCreateResponse, LectureDetailResponse, PageLectureListDto,
   LectureChapterRequest, LectureChapterResponse, ChapterWatchResponse,
   EnrollmentResponse,
+  ReviewRequest, ReviewResponse, ReviewSummaryResponse,
+  LikeResponse,
+  NotificationResponse, UnreadCountResponse, PageResponse,
 } from '../types';
 
 // Auth
@@ -82,4 +85,32 @@ export const enrollmentApi = {
     api.delete<ApiResponse<void>>(`/api/enrollment/${lectureId}`),
   getMyEnrollments: () =>
     api.get<ApiResponse<EnrollmentResponse[]>>('/api/enrollment/me'),
+};
+
+// Review
+export const reviewApi = {
+  create: (data: ReviewRequest) =>
+    api.post<ApiResponse<void>>('/api/reviews', data),
+  update: (reviewId: number, data: ReviewRequest) =>
+    api.put<ApiResponse<void>>(`/api/reviews/${reviewId}`, data),
+  getSummary: (lectureId: number) =>
+    api.get<ApiResponse<ReviewSummaryResponse>>(`/api/reviews/summary?lectureId=${lectureId}`),
+  getList: (lectureId: number) =>
+    api.get<ApiResponse<ReviewResponse[]>>(`/api/reviews?lectureId=${lectureId}`),
+};
+
+// Like
+export const likeApi = {
+  toggle: (lectureId: number) =>
+    api.post<ApiResponse<LikeResponse>>(`/api/lectures/${lectureId}/like`),
+};
+
+// Notification
+export const notificationApi = {
+  getList: (page = 0, size = 10) =>
+    api.get<ApiResponse<PageResponse<NotificationResponse>>>(`/api/notifications?page=${page}&size=${size}`),
+  markAsRead: (notificationId: number) =>
+    api.patch<ApiResponse<void>>(`/api/notifications/${notificationId}/read`),
+  getUnreadCount: () =>
+    api.get<ApiResponse<UnreadCountResponse>>('/api/notifications/unread-count'),
 };

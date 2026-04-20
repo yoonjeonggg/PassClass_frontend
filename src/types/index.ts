@@ -99,6 +99,7 @@ export interface LectureDetailResponse {
   thumbnailUrl: string;
   description: string;
   rating: number;
+  isLiked: boolean;
   likeCount: number;
   studentCount: number;
   chapterCount: number;
@@ -160,6 +161,57 @@ export interface EnrollmentResponse {
   lectureId: number;
   lectureTitle: string;
   createdAt: string;
+}
+
+// Review
+export interface ReviewRequest {
+  lectureId: number;
+  rating: number;
+  content: string;
+}
+
+export interface ReviewResponse {
+  reviewId: number;
+  rating: number;
+  content: string;
+  nickname: string;
+  profileUrl: string;
+  createdAt: string;
+}
+
+export interface ReviewSummaryResponse {
+  averageRating: number;
+  reviewCount: number;
+}
+
+// Like
+export interface LikeResponse {
+  isLiked: boolean;
+}
+
+// Notification
+export interface NotificationResponse {
+  id: number;
+  type: string;
+  content: string;
+  isRead: boolean;
+  createdAt: string;
+}
+
+export interface UnreadCountResponse {
+  unreadCount: number;
+}
+
+export interface PageResponse<T> {
+  totalPages: number;
+  totalElements: number;
+  first: boolean;
+  last: boolean;
+  size: number;
+  content: T[];
+  number: number;
+  numberOfElements: number;
+  empty: boolean;
 }
 
 // API Response wrapper
