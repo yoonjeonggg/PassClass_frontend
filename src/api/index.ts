@@ -11,6 +11,7 @@ import type {
   ReviewRequest, ReviewResponse, ReviewSummaryResponse,
   LikeResponse,
   NotificationResponse, UnreadCountResponse, PageResponse,
+  FileResponse,
 } from '../types';
 
 // Auth
@@ -103,6 +104,19 @@ export const reviewApi = {
 export const likeApi = {
   toggle: (lectureId: number) =>
     api.post<ApiResponse<LikeResponse>>(`/api/lectures/${lectureId}/like`),
+};
+
+// File
+export const fileApi = {
+  upload: (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    return api.upload<ApiResponse<FileResponse>>('/api/files', formData);
+  },
+  getInfo: (fileId: number) =>
+    api.get<ApiResponse<FileResponse>>(`/api/files/${fileId}`),
+  delete: (fileId: number) =>
+    api.delete<ApiResponse<void>>(`/api/files/${fileId}`),
 };
 
 // Notification

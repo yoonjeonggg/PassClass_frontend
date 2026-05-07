@@ -1,17 +1,40 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { userApi } from '../api';
+import { userApi, fileApi } from '../api';
 import { useToast } from '../components/Toast';
 import './Profile.css';
 
 export default function Profile() {
   const { user, refreshUser } = useAuth();
   const { toast } = useToast();
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [editing, setEditing] = useState(false);
   const [form, setForm] = useState({ nickname: user?.nickname || '', profileImage: user?.profileImage || '' });
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   if (!user) return null;
+
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const preview = URL.createObjectURL(file);
+    setPreviewUrl(preview);
+    setUploading(true);
+
+    try {
+      const res = await fileApi.upload(file);
+      setForm(p => ({ ...p, profileImage: res.data.fileUrl }));
+      toast('이미지가 업로드되었습니다.', 'success');
+    } catch (err: any) {
+      toast(err.message || '업로드 실패', 'error');
+      setPreviewUrl(null);
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,12 +44,15 @@ export default function Profile() {
       await refreshUser();
       toast('프로필이 수정되었습니다.', 'success');
       setEditing(false);
+      setPreviewUrl(null);
     } catch (err: any) {
       toast(err.message || '수정 실패', 'error');
     } finally {
       setSaving(false);
     }
   };
+
+  const currentImage = previewUrl || (editing ? form.profileImage : user.profileImage);
 
   return (
     <div className="profile-page">
@@ -38,11 +64,30 @@ export default function Profile() {
         <div className="profile-card fade-up">
           <div className="profile-avatar-wrap">
             <div className="profile-avatar">
-              {user.profileImage
-                ? <img src={user.profileImage} alt="" />
+              {currentImage
+                ? <img src={currentImage} alt="" />
                 : <span>{user.nickname[0]}</span>
               }
             </div>
+            {editing && (
+              <div className="avatar-upload-area">
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/jpeg,image/png,image/gif"
+                  style={{ display: 'none' }}
+                  onChange={handleFileSelect}
+                />
+                <button
+                  type="button"
+                  className="btn btn-ghost avatar-upload-btn"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploading}
+                >
+                  {uploading ? '업로드 중...' : '📷 사진 변경'}
+                </button>
+              </div>
+            )}
           </div>
 
           {editing ? (
@@ -57,21 +102,19 @@ export default function Profile() {
                   required
                 />
               </div>
-              <div className="form-group">
-                <label>프로필 이미지 URL</label>
-                <input
-                  type="url"
-                  className="form-input"
-                  placeholder="https://..."
-                  value={form.profileImage}
-                  onChange={e => setForm(p => ({ ...p, profileImage: e.target.value }))}
-                />
-              </div>
               <div className="profile-form-actions">
-                <button type="submit" className="btn btn-primary" disabled={saving}>
+                <button type="submit" className="btn btn-primary" disabled={saving || uploading}>
                   {saving ? '저장 중...' : '저장'}
                 </button>
-                <button type="button" className="btn btn-ghost" onClick={() => setEditing(false)}>
+                <button
+                  type="button"
+                  className="btn btn-ghost"
+                  onClick={() => {
+                    setEditing(false);
+                    setPreviewUrl(null);
+                    setForm({ nickname: user.nickname, profileImage: user.profileImage || '' });
+                  }}
+                >
                   취소
                 </button>
               </div>
@@ -90,7 +133,13 @@ export default function Profile() {
                 <span className="profile-label">계정 ID</span>
                 <span className="profile-value">#{user.id}</span>
               </div>
-              <button className="btn btn-outline" onClick={() => { setForm({ nickname: user.nickname, profileImage: user.profileImage || '' }); setEditing(true); }}>
+              <button
+                className="btn btn-outline"
+                onClick={() => {
+                  setForm({ nickname: user.nickname, profileImage: user.profileImage || '' });
+                  setEditing(true);
+                }}
+              >
                 ✏️ 프로필 수정
               </button>
             </div>

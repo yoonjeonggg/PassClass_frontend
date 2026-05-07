@@ -27,6 +27,27 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   return res.json();
 }
 
+async function uploadFile<T>(path: string, formData: FormData): Promise<T> {
+  const token = getToken();
+  const headers: Record<string, string> = {};
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
+  const res = await fetch(`${BASE_URL}${path}`, {
+    method: "POST",
+    headers,
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ message: "요청 실패" }));
+    throw new Error(err.message || `HTTP ${res.status}`);
+  }
+
+  return res.json();
+}
+
 export const api = {
   get: <T>(path: string) => request<T>(path),
   post: <T>(path: string, body?: unknown) =>
@@ -45,4 +66,5 @@ export const api = {
       body: body ? JSON.stringify(body) : undefined,
     }),
   delete: <T>(path: string) => request<T>(path, { method: "DELETE" }),
+  upload: <T>(path: string, formData: FormData) => uploadFile<T>(path, formData),
 };

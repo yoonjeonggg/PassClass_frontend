@@ -13,8 +13,8 @@
   --white: #FFFFFF;
   --radius: 12px;
   --radius-sm: 8px;
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'Noto Sans KR', sans-serif;
+  --font-display: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-body: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --shadow: 0 4px 24px rgba(0,0,0,0.08);
   --shadow-lg: 0 8px 48px rgba(0,0,0,0.14);
 }
@@ -35,6 +35,9 @@ body {
   color: var(--black);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  word-break: keep-all;
+  word-wrap: break-word;
 }
 
 a {
@@ -201,7 +204,8 @@ img {
 .page-header h1 {
   font-family: var(--font-display);
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
 /* Empty state */
@@ -227,6 +231,19 @@ img {
 }
 .fade-up {
   animation: fadeUp 0.4s ease forwards;
+}
+
+/* Responsive container */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  .page-header h1 {
+    font-size: 24px;
+  }
+  .page-header {
+    padding: 32px 0 24px;
+  }
 }
 
 /* Toast */

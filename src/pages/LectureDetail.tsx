@@ -11,6 +11,13 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../components/Toast";
 import "./LectureDetail.css";
 
+function getEmbedUrl(url: string): string {
+  if (!url) return url;
+  const ytMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+  if (ytMatch) return `https://www.youtube.com/embed/${ytMatch[1]}`;
+  return url;
+}
+
 function StarRating({
   value,
   onChange,
@@ -289,9 +296,10 @@ export default function LectureDetail() {
               </div>
               <div className="video-embed">
                 <iframe
-                  src={watchData.videoUrl}
+                  src={getEmbedUrl(watchData.videoUrl)}
                   title={watchData.title}
                   frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 />
               </div>

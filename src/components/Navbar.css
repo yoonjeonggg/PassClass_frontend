@@ -26,7 +26,7 @@
   font-size: 20px;
   font-weight: 800;
   color: var(--orange);
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
 }
 
 .navbar-links {
@@ -312,4 +312,20 @@
   text-align: center;
   color: var(--gray-400);
   font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .navbar-links {
+    display: none;
+  }
+  .user-name {
+    display: none;
+  }
+  .notif-dropdown {
+    right: -60px;
+    width: 290px;
+  }
+  .auth-buttons {
+    gap: 4px;
+  }
 }

@@ -214,6 +214,16 @@ export interface PageResponse<T> {
   empty: boolean;
 }
 
+// File
+export interface FileResponse {
+  fileId: number;
+  originalName: string;
+  fileUrl: string;
+  fileSize: number;
+  contentType: string;
+  createdAt: string;
+}
+
 // API Response wrapper
 export interface ApiResponse<T> {
   success: boolean;

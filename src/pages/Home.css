@@ -73,8 +73,8 @@
   font-family: var(--font-display);
   font-size: 56px;
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -2px;
+  line-height: 1.2;
+  letter-spacing: -1.5px;
   color: var(--black);
   margin-bottom: 20px;
 }
@@ -153,7 +153,7 @@
   font-family: var(--font-display);
   font-size: 28px;
   font-weight: 700;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.3px;
 }
 
 .section-more {
@@ -208,6 +208,38 @@
   gap: 24px;
 }
 
+@media (max-width: 640px) {
+  .hero {
+    padding: 60px 0 48px;
+  }
+  .hero-title {
+    font-size: 36px;
+    letter-spacing: -0.5px;
+  }
+  .hero-desc {
+    font-size: 15px;
+  }
+  .hero-stats {
+    gap: 16px;
+    padding: 16px 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .stat-divider {
+    display: none;
+  }
+  .section {
+    padding: 48px 0;
+  }
+  .section-title {
+    font-size: 22px;
+  }
+  .lectures-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+  }
+}
+
 /* CTA */
 .cta-section {
   padding: 80px 0;
@@ -227,7 +259,7 @@
   font-family: var(--font-display);
   font-size: 36px;
   font-weight: 800;
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
 }
 
 .cta-inner p {
