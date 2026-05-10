@@ -1,28 +1,28 @@
-.lectures-page { min-height: 100vh; padding-bottom: 80px; }
+.lectures-page { min-height: 100vh; padding-bottom: 120px; }
 
 /* Hero bar */
 .lectures-hero {
   background: var(--black);
-  padding: 40px 0 36px;
+  padding: 60px 0 52px;
 }
 
 .lectures-hero-title {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 800;
   color: white;
   letter-spacing: -0.5px;
-  margin-bottom: 6px;
+  margin-bottom: 14px;
 }
 
-.lectures-hero-sub { font-size: 14px; color: #888; }
+.lectures-hero-sub { font-size: 15px; color: #999; }
 
 /* Layout */
 .lectures-body {
   display: grid;
   grid-template-columns: 200px 1fr;
-  gap: 40px;
-  padding-top: 36px;
+  gap: 48px;
+  padding-top: 56px;
   align-items: start;
 }
 
@@ -32,7 +32,7 @@
   top: 84px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 36px;
 }
 
 .sidebar-section { display: flex; flex-direction: column; gap: 10px; }
@@ -47,11 +47,11 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-.sidebar-cats { display: flex; flex-direction: column; gap: 2px; }
+.sidebar-cats { display: flex; flex-direction: column; gap: 4px; }
 
 .sidebar-cat {
   text-align: left;
-  padding: 7px 10px;
+  padding: 9px 12px;
   font-size: 13px;
   font-weight: 500;
   color: var(--gray-600);
@@ -65,11 +65,11 @@
 .sidebar-cat:hover { background: var(--gray-100); color: var(--black); }
 .sidebar-cat.active { background: var(--orange-dim); color: var(--orange); font-weight: 700; }
 
-.sidebar-sort { display: flex; flex-direction: column; gap: 2px; }
+.sidebar-sort { display: flex; flex-direction: column; gap: 4px; }
 
 .sidebar-sort-btn {
   text-align: left;
-  padding: 7px 10px;
+  padding: 9px 12px;
   font-size: 13px;
   font-weight: 500;
   color: var(--gray-600);
@@ -84,7 +84,7 @@
 .sidebar-sort-btn.active { background: var(--orange-dim); color: var(--orange); font-weight: 700; }
 
 /* Main */
-.lectures-main { display: flex; flex-direction: column; gap: 24px; }
+.lectures-main { display: flex; flex-direction: column; gap: 32px; }
 
 .lectures-toolbar {
   display: flex;
@@ -113,7 +113,7 @@
 .lectures-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 18px;
+  gap: 24px;
 }
 
 /* Pagination */
@@ -174,7 +174,8 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .lectures-body { grid-template-columns: 1fr; }
+  .lectures-hero { padding: 44px 0 40px; }
+  .lectures-body { grid-template-columns: 1fr; padding-top: 40px; }
   .lectures-sidebar { display: none; }
   .lectures-sort-mobile { display: block; }
 }

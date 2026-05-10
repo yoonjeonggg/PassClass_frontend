@@ -65,10 +65,10 @@
 
 /* Body */
 .lc-body {
-  padding: 14px 16px 16px;
+  padding: 16px 18px 18px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .lc-cert {

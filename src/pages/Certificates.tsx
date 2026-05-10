@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { certificateApi } from '../api';
 import type { CertificateResponse } from '../types';
 import { useToast } from '../components/Toast';
-import { IconSearch, IconAward, IconArrowRight } from '../components/Icons';
+import { IconSearch, IconAward, IconArrowRight, IconFileText, IconClipboard } from '../components/Icons';
 import './Certificates.css';
 
 export default function Certificates() {
@@ -91,30 +91,37 @@ export default function Certificates() {
         ) : certificates.length > 0 ? (
           <div className="cert-cards fade-up">
             {certificates.map((cert, i) => (
-              <Link
+              <div
                 key={cert.id}
-                to={`/lectures?certificate=${cert.id}`}
                 className="cert-card"
                 style={{ animationDelay: `${i * 0.04}s` }}
               >
-                <div className="cert-card-icon">
-                  <IconAward size={20} />
-                </div>
-                <div className="cert-card-body">
-                  <h3 className="cert-card-name">{cert.name}</h3>
-                  {cert.description && (
-                    <p className="cert-card-desc">{cert.description}</p>
-                  )}
-                  <div className="cert-card-footer">
+                <div className="cert-card-top">
+                  <div className="cert-card-icon">
+                    <IconAward size={20} />
+                  </div>
+                  <div className="cert-card-body">
+                    <h3 className="cert-card-name">{cert.name}</h3>
+                    {cert.description && (
+                      <p className="cert-card-desc">{cert.description}</p>
+                    )}
                     <span className="cert-card-date">
                       {new Date(cert.createdAt).toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' })}
                     </span>
-                    <span className="cert-card-link">
-                      강의 보기 <IconArrowRight size={12} />
-                    </span>
                   </div>
                 </div>
-              </Link>
+                <div className="cert-card-actions">
+                  <Link to={`/lectures?certificate=${cert.id}`} className="cert-action-btn">
+                    <IconArrowRight size={12} /> 강의
+                  </Link>
+                  <Link to={`/problems?certificateId=${cert.id}`} className="cert-action-btn">
+                    <IconFileText size={12} /> 문제풀기
+                  </Link>
+                  <Link to={`/mock-exams?certificateId=${cert.id}`} className="cert-action-btn">
+                    <IconClipboard size={12} /> 모의고사
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         ) : (

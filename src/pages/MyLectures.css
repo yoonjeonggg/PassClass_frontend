@@ -2,30 +2,30 @@
 
 .my-lectures-hero {
   background: var(--black);
-  padding: 40px 0 36px;
+  padding: 60px 0 52px;
 }
 
 .my-hero-title {
   font-family: var(--font-display);
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 800;
   color: white;
   letter-spacing: -0.5px;
-  margin-bottom: 6px;
+  margin-bottom: 14px;
 }
 
-.my-hero-sub { font-size: 14px; color: #888; }
+.my-hero-sub { font-size: 15px; color: #999; }
 
-.my-body { padding-top: 36px; }
+.my-body { padding-top: 56px; }
 
 .my-count {
   font-size: 13px;
   color: var(--gray-400);
   font-weight: 500;
-  margin-bottom: 20px;
+  margin-bottom: 28px;
 }
 
-.enrollment-list { display: flex; flex-direction: column; gap: 12px; }
+.enrollment-list { display: flex; flex-direction: column; gap: 16px; }
 
 .enrollment-card {
   display: grid;
@@ -149,6 +149,8 @@
 .loading-center { display: flex; justify-content: center; padding: 100px; }
 
 @media (max-width: 640px) {
+  .my-lectures-hero { padding: 44px 0 40px; }
+  .my-body { padding-top: 40px; }
   .enrollment-card { grid-template-columns: 48px 1fr; gap: 14px; }
   .ec-actions { grid-column: 1 / -1; justify-content: flex-end; }
 }

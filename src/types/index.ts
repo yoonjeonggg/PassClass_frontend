@@ -248,6 +248,72 @@ export interface FileResponse {
   createdAt: string;
 }
 
+// Problem
+export interface ProblemListItem {
+  id: number;
+  content: string;
+}
+
+export interface ProblemDetail {
+  id: number;
+  content: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  correctAnswer?: number;
+  explanation?: string;
+}
+
+export interface ProblemSolveRequest {
+  selectedAnswer: number;
+}
+
+export interface ProblemSolveResponse {
+  correct: boolean;
+  explanation: string;
+}
+
+// MockExam
+export interface MockExamListItem {
+  id: number;
+  title: string;
+}
+
+export interface MockExamQuestion {
+  problemId: number;
+  content: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+}
+
+export interface MockExamDetailResponse {
+  mockExamId: number;
+  title: string;
+  questions: MockExamQuestion[];
+}
+
+export interface MockExamAnswerItem {
+  problemId: number;
+  selectedAnswer: number;
+}
+
+export interface MockExamSubmitRequest {
+  answers: MockExamAnswerItem[];
+}
+
+export interface MockExamResultItem {
+  problemId: number;
+  correct: boolean;
+}
+
+export interface MockExamSubmitResponse {
+  score: number;
+  results: MockExamResultItem[];
+}
+
 // API Response wrapper
 export interface ApiResponse<T> {
   success: boolean;

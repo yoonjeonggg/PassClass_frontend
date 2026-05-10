@@ -13,6 +13,8 @@ import type {
   LikeResponse,
   NotificationResponse, UnreadCountResponse, PageResponse,
   FileResponse,
+  ProblemListItem, ProblemSolveRequest, ProblemSolveResponse,
+  MockExamListItem, MockExamDetailResponse, MockExamSubmitRequest, MockExamSubmitResponse,
 } from '../types';
 
 // Auth
@@ -124,6 +126,26 @@ export const fileApi = {
     api.get<ApiResponse<FileResponse>>(`/api/files/${fileId}`),
   delete: (fileId: number) =>
     api.delete<ApiResponse<void>>(`/api/files/${fileId}`),
+};
+
+// Problem
+export const problemApi = {
+  getList: (certificateId: number) =>
+    api.get<ApiResponse<ProblemListItem[]>>(`/api/problems?certificateId=${certificateId}`),
+  solve: (problemId: number, data: ProblemSolveRequest) =>
+    api.post<ApiResponse<ProblemSolveResponse>>(`/api/problems/${problemId}/solve`, data),
+};
+
+// MockExam
+export const mockExamApi = {
+  getList: (certificateId: number) =>
+    api.get<ApiResponse<MockExamListItem[]>>(`/api/mock-exams?certificateId=${certificateId}`),
+  getDetail: (mockExamId: number) =>
+    api.get<ApiResponse<MockExamDetailResponse>>(`/api/mock-exams/${mockExamId}`),
+  submit: (mockExamId: number, data: MockExamSubmitRequest) =>
+    api.post<ApiResponse<MockExamSubmitResponse>>(`/api/mock-exams/${mockExamId}/submit`, data),
+  getResults: (mockExamId: number) =>
+    api.get<ApiResponse<MockExamSubmitResponse>>(`/api/mock-exams/${mockExamId}/results`),
 };
 
 // Notification

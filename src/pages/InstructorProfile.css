@@ -7,7 +7,7 @@
 .instructor-hero {
   background: var(--black);
   color: white;
-  padding: 56px 0;
+  padding: 72px 0;
 }
 
 .instructor-hero-inner {
@@ -88,14 +88,14 @@
 
 /* ── Body ── */
 .instructor-body {
-  padding-top: 48px;
+  padding-top: 64px;
 }
 
 .instructor-section-title {
   font-family: var(--font-display);
   font-size: 22px;
   font-weight: 700;
-  margin-bottom: 28px;
+  margin-bottom: 36px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -111,7 +111,7 @@
 .instructor-lectures-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
+  gap: 28px;
 }
 
 /* ── Lecture Card ── */

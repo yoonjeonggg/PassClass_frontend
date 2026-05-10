@@ -13,6 +13,9 @@ import Certificates from './pages/Certificates';
 import MyLectures from './pages/MyLectures';
 import Profile from './pages/Profile';
 import InstructorProfile from './pages/InstructorProfile';
+import Problems from './pages/Problems';
+import MockExams from './pages/MockExams';
+import MockExamSession from './pages/MockExamSession';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -38,6 +41,9 @@ function AppRoutes() {
           <Route path="/lectures/:lectureId" element={<LectureDetail />} />
           <Route path="/instructor/:instructorId" element={<InstructorProfile />} />
           <Route path="/certificates" element={<Certificates />} />
+          <Route path="/problems"     element={<Problems />} />
+          <Route path="/mock-exams"   element={<MockExams />} />
+          <Route path="/mock-exams/:id" element={<MockExamSession />} />
           <Route path="/my-lectures" element={
             <ProtectedRoute><MyLectures /></ProtectedRoute>
           } />

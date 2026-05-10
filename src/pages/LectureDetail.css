@@ -7,7 +7,7 @@
 .detail-hero {
   background: var(--black);
   color: white;
-  padding: 60px 0;
+  padding: 72px 0;
 }
 
 .detail-hero-inner {
@@ -314,8 +314,8 @@
 .detail-body {
   display: grid;
   grid-template-columns: 1fr 320px;
-  gap: 40px;
-  padding-top: 40px;
+  gap: 48px;
+  padding-top: 56px;
   align-items: start;
 }
 
@@ -327,14 +327,14 @@
 
 /* ── Progress Card (above tabs) ── */
 .lecture-progress-card {
-  padding: 20px 24px;
+  padding: 24px 28px;
   border: 1px solid #ebebeb;
   border-radius: var(--radius);
   background: #fafafa;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .lpc-header {
@@ -379,7 +379,7 @@
 .detail-tabs {
   display: flex;
   border-bottom: 2px solid #ebebeb;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
   gap: 0;
 }
 
@@ -790,7 +790,7 @@
   .detail-hero-thumb { display: none; }
   .detail-body {
     grid-template-columns: 1fr;
-    padding-top: 28px;
+    padding-top: 40px;
   }
   .detail-sidebar { position: static; }
   .player-zone {

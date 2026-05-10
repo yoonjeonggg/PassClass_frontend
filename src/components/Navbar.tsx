@@ -92,6 +92,8 @@ export default function Navbar() {
         <div className="navbar-links">
           <Link to="/lectures"     className={`nav-link ${isActive("/lectures") ? "active" : ""}`}>강의</Link>
           <Link to="/certificates" className={`nav-link ${isActive("/certificates") ? "active" : ""}`}>자격증</Link>
+          <Link to="/problems"     className={`nav-link ${isActive("/problems") ? "active" : ""}`}>문제풀기</Link>
+          <Link to="/mock-exams"   className={`nav-link ${isActive("/mock-exams") ? "active" : ""}`}>모의고사</Link>
           {user && (
             <Link to="/my-lectures" className={`nav-link ${isActive("/my-lectures") ? "active" : ""}`}>내 수강</Link>
           )}

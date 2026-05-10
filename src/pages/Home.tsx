@@ -245,13 +245,20 @@ export default function Home() {
           {loading ? (
             <div className="loading-center"><div className="spinner" /></div>
           ) : lectures.length > 0 ? (
-            <div className="lectures-grid">
-              {lectures.map((l, i) => (
-                <div key={l.id} className="fade-up" style={{ animationDelay: `${i * 0.05}s` }}>
-                  <LectureCard lecture={l} />
-                </div>
-              ))}
-            </div>
+            <>
+              <div className="lectures-grid">
+                {lectures.map((l, i) => (
+                  <div key={l.id} className="fade-up" style={{ animationDelay: `${i * 0.05}s` }}>
+                    <LectureCard lecture={l} />
+                  </div>
+                ))}
+              </div>
+              <div className="section-more-wrap">
+                <Link to="/lectures" className="btn btn-outline section-more-btn">
+                  전체 강의 보기 <IconArrowRight size={15} />
+                </Link>
+              </div>
+            </>
           ) : (
             <div className="empty-state">
               <p>아직 등록된 강의가 없습니다</p>
