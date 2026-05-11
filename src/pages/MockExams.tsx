@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { certificateApi, mockExamApi } from '../api';
 import type { CertificateResponse, MockExamListItem } from '../types';
-import { IconClipboard, IconArrowRight } from '../components/Icons';
+import { IconClipboard, IconArrowRight, IconCheck } from '../components/Icons';
 import './MockExams.css';
 
 export default function MockExams() {
@@ -100,18 +100,27 @@ export default function MockExams() {
                   <Link
                     key={exam.id}
                     to={`/mock-exams/${exam.id}`}
-                    className="mock-card fade-up"
+                    className={`mock-card fade-up ${exam.completed ? 'completed' : ''}`}
                     style={{ animationDelay: `${idx * 0.05}s` }}
                   >
                     <div className="mock-card-left">
-                      <div className="mock-card-num">{idx + 1}</div>
+                      <div className={`mock-card-num ${exam.completed ? 'done' : ''}`}>
+                        {exam.completed ? <IconCheck size={16} /> : idx + 1}
+                      </div>
                       <div>
                         <p className="mock-card-title">{exam.title}</p>
                         <p className="mock-card-sub">{selectedCert?.name}</p>
                       </div>
                     </div>
-                    <div className="mock-card-action">
-                      응시하기 <IconArrowRight size={14} />
+                    <div className="mock-card-right">
+                      {exam.completed && exam.score !== null && (
+                        <span className={`mock-score-badge ${exam.score >= 60 ? 'pass' : 'fail'}`}>
+                          {exam.score}점 {exam.score >= 60 ? '합격' : '불합격'}
+                        </span>
+                      )}
+                      <div className="mock-card-action">
+                        {exam.completed ? '다시 풀기' : '응시하기'} <IconArrowRight size={14} />
+                      </div>
                     </div>
                   </Link>
                 ))}

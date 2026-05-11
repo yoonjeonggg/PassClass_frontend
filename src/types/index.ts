@@ -278,6 +278,8 @@ export interface ProblemSolveResponse {
 export interface MockExamListItem {
   id: number;
   title: string;
+  completed: boolean;
+  score: number | null;
 }
 
 export interface MockExamQuestion {

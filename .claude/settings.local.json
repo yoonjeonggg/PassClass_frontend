@@ -13,7 +13,9 @@
       "Bash(Select-Object -First 20 FullName)",
       "Bash(Get-ChildItem -Path \"D:\\\\PassClass\\\\PassClass_frontend\" -Recurse -Force)",
       "Bash(Head -100)",
-      "mcp__claude_ai_Notion__notion-fetch"
+      "mcp__claude_ai_Notion__notion-fetch",
+      "Bash(Get-ChildItem -Recurse -Filter \"*MockExam*\")",
+      "Bash(./gradlew test *)"
     ]
   }
 }
