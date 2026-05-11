@@ -24,11 +24,7 @@
 }
 
 .hero-bg::after {
-  content: '';
-  position: absolute;
-  top: -120px; right: -120px;
-  width: 560px; height: 560px;
-  background: radial-gradient(circle, rgba(255,92,0,0.08) 0%, transparent 65%);
+  display: none;
 }
 
 .hero-layout {
@@ -540,7 +536,7 @@
   transition: all 0.2s;
 }
 
-.btn-cta:hover { background: var(--orange-light); transform: translateY(-1px); }
+.btn-cta:hover { background: #E04B00; transform: translateY(-1px); }
 
 .btn-cta-ghost {
   display: inline-flex;

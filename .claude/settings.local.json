@@ -8,7 +8,12 @@
       "Bash(node -e ' *)",
       "Bash(Get-ChildItem -Path \"D:\\\\PassClass\\\\PassClass_backend\" -Recurse -Directory)",
       "Bash(Select-Object FullName)",
-      "Bash(npx tsc *)"
+      "Bash(npx tsc *)",
+      "Bash(Get-ChildItem -Recurse -Directory)",
+      "Bash(Select-Object -First 20 FullName)",
+      "Bash(Get-ChildItem -Path \"D:\\\\PassClass\\\\PassClass_frontend\" -Recurse -Force)",
+      "Bash(Head -100)",
+      "mcp__claude_ai_Notion__notion-fetch"
     ]
   }
 }

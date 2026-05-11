@@ -16,6 +16,7 @@ import InstructorProfile from './pages/InstructorProfile';
 import Problems from './pages/Problems';
 import MockExams from './pages/MockExams';
 import MockExamSession from './pages/MockExamSession';
+import WrongNotes from './pages/WrongNotes';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -49,6 +50,9 @@ function AppRoutes() {
           } />
           <Route path="/profile" element={
             <ProtectedRoute><Profile /></ProtectedRoute>
+          } />
+          <Route path="/wrong-notes" element={
+            <ProtectedRoute><WrongNotes /></ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

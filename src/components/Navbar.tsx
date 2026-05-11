@@ -5,7 +5,7 @@ import { notificationApi } from "../api";
 import type { NotificationResponse } from "../types";
 import {
   IconBell, IconUser, IconBook, IconLogOut, IconChevronDown,
-  IconMonitor, IconVideo
+  IconMonitor, IconVideo, IconFileText
 } from "./Icons";
 import "./Navbar.css";
 
@@ -97,6 +97,9 @@ export default function Navbar() {
           {user && (
             <Link to="/my-lectures" className={`nav-link ${isActive("/my-lectures") ? "active" : ""}`}>내 수강</Link>
           )}
+          {user && (
+            <Link to="/wrong-notes" className={`nav-link ${isActive("/wrong-notes") ? "active" : ""}`}>오답노트</Link>
+          )}
         </div>
 
         <div className="navbar-actions">
@@ -179,6 +182,9 @@ export default function Navbar() {
                     </Link>
                     <Link to="/my-lectures" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                       <IconBook size={15} /> 내 수강 목록
+                    </Link>
+                    <Link to="/wrong-notes" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+                      <IconFileText size={15} /> 오답노트
                     </Link>
                     <div className="dropdown-divider" />
                     <button className="dropdown-item danger" onClick={handleLogout}>

@@ -314,6 +314,21 @@ export interface MockExamSubmitResponse {
   results: MockExamResultItem[];
 }
 
+// WrongNote
+export interface WrongNoteResponse {
+  wrongNoteId: number;
+  problemId: number;
+  content: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  selectedAnswer: number;
+  correctAnswer: number;
+  explanation: string;
+  memo: string | null;
+}
+
 // API Response wrapper
 export interface ApiResponse<T> {
   success: boolean;

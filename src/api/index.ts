@@ -15,6 +15,7 @@ import type {
   FileResponse,
   ProblemListItem, ProblemSolveRequest, ProblemSolveResponse,
   MockExamListItem, MockExamDetailResponse, MockExamSubmitRequest, MockExamSubmitResponse,
+  WrongNoteResponse,
 } from '../types';
 
 // Auth
@@ -146,6 +147,12 @@ export const mockExamApi = {
     api.post<ApiResponse<MockExamSubmitResponse>>(`/api/mock-exams/${mockExamId}/submit`, data),
   getResults: (mockExamId: number) =>
     api.get<ApiResponse<MockExamSubmitResponse>>(`/api/mock-exams/${mockExamId}/results`),
+};
+
+// WrongNote
+export const wrongNoteApi = {
+  getMyNotes: () => api.get<ApiResponse<WrongNoteResponse[]>>('/api/wrong-notes'),
+  deleteNote: (wrongNoteId: number) => api.delete<ApiResponse<void>>(`/api/wrong-notes/${wrongNoteId}`),
 };
 
 // Notification

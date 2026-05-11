@@ -29,7 +29,7 @@ const FEATURES = [
     icon: <IconShield size={22} />,
     title: "검증된 강사진",
     desc: "현직 전문가와 합격 경험자가 직접 강의를 제작하고 최신 내용으로 유지합니다.",
-    color: "#FF5C00",
+    color: "#FF5500",
   },
 ];
 

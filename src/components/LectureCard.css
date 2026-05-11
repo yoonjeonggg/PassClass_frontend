@@ -2,17 +2,17 @@
   display: block;
   background: white;
   border-radius: var(--radius);
-  border: 1px solid #ebebeb;
+  border: 1px solid var(--gray-200);
   overflow: hidden;
-  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s, transform 0.2s;
   text-decoration: none;
   color: inherit;
 }
 
 .lecture-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
-  transform: translateY(-3px);
-  border-color: #d8d8d8;
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
 }
 
 /* Thumbnail */
@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: #1c1c1c;
 }
 
 .lc-thumb-placeholder span {

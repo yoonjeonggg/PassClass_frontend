@@ -25,6 +25,7 @@ export default function MockExamSession() {
     if (!id) { setPhase('error'); return; }
     mockExamApi.getDetail(Number(id))
       .then(res => {
+        console.log('[MockExam] API response:', res);
         setExam(res.data);
         setPhase('exam');
       })
@@ -142,7 +143,29 @@ export default function MockExamSession() {
   }
 
   /* ── Exam phase ── */
+  if (!exam.questions || exam.questions.length === 0) {
+    return (
+      <div className="session-page">
+        <div className="session-error">
+          <p>이 모의고사에 등록된 문제가 없습니다.</p>
+          <Link to="/mock-exams" className="btn btn-primary" style={{ marginTop: 16 }}>목록으로</Link>
+        </div>
+      </div>
+    );
+  }
+
   const currentQuestion: MockExamQuestion = exam.questions[currentQ];
+
+  if (!currentQuestion) {
+    return (
+      <div className="session-page">
+        <div className="session-error">
+          <p>문제를 불러올 수 없습니다.</p>
+          <Link to="/mock-exams" className="btn btn-primary" style={{ marginTop: 16 }}>목록으로</Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="session-page">
