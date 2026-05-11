@@ -25,7 +25,6 @@ export default function MockExamSession() {
     if (!id) { setPhase('error'); return; }
     mockExamApi.getDetail(Number(id))
       .then(res => {
-        console.log('[MockExam] API response:', res);
         setExam(res.data);
         setPhase('exam');
       })

@@ -198,18 +198,19 @@ export default function Problems() {
 
               {!currentState.submitted ? (
                 <div className="prob-options">
-                  <p className="prob-options-label">정답 번호를 선택하세요</p>
-                  <div className="prob-options-row">
-                    {[1, 2, 3, 4].map(val => (
+                  {(['option1', 'option2', 'option3', 'option4'] as const).map((key, i) => {
+                    const val = i + 1;
+                    return (
                       <button
                         key={val}
-                        className={`prob-option-num-btn ${currentState.selectedAnswer === val ? 'selected' : ''}`}
+                        className={`prob-option-btn ${currentState.selectedAnswer === val ? 'selected' : ''}`}
                         onClick={() => selectOption(currentProblem.id, val)}
                       >
-                        {val}
+                        <span className="prob-option-num">{val}</span>
+                        <span className="prob-option-text">{currentProblem[key]}</span>
                       </button>
-                    ))}
-                  </div>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className={`prob-result ${currentState.result?.correct ? 'result-correct' : 'result-wrong'}`}>
