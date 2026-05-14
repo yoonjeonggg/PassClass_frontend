@@ -1,7 +1,9 @@
 import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { userApi, fileApi } from '../api';
 import { useToast } from '../components/Toast';
+import { isAdmin, isTeacher, normalizeUserRole, getProfileRoleRawString } from '../utils/roles';
 import './Profile.css';
 
 export default function Profile() {
@@ -15,6 +17,9 @@ export default function Profile() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
 
   if (!user) return null;
+
+  const roleNorm = normalizeUserRole(user);
+  const roleRaw = getProfileRoleRawString(user);
 
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -60,6 +65,40 @@ export default function Profile() {
         <div className="page-header">
           <h1>내 프로필</h1>
         </div>
+
+        {(isTeacher(user) || isAdmin(user)) && (
+          <div className="profile-staff-banner fade-up">
+            <p className="profile-staff-banner-title">운영 도구</p>
+            <p className="profile-staff-banner-desc">
+              강의·챕터·문제·모의고사는 전용 페이지에서 관리합니다.
+            </p>
+            <div className="profile-staff-banner-actions">
+              {isTeacher(user) && (
+                <Link to="/teacher" className="btn btn-primary">강사 스튜디오</Link>
+              )}
+              {isAdmin(user) && (
+                <Link to="/admin" className="btn btn-outline">관리자</Link>
+              )}
+            </div>
+          </div>
+        )}
+
+        {!roleNorm && (
+          <div className="profile-role-hint fade-up" role="status">
+            {!roleRaw && (
+              <p>
+                프로필 응답에 <code>userRole</code>이 없습니다. 서버에서 예: <code>TEACHER</code>를 내려주면
+                강사 스튜디오 메뉴와 <Link to="/teacher">/teacher</Link> 접근이 활성화됩니다.
+              </p>
+            )}
+            {roleRaw && (
+              <p>
+                역할 값을 인식하지 못했습니다: <code>{roleRaw}</code>.
+                가능하면 <code>ADMIN</code>, <code>TEACHER</code>, <code>STUDENT</code> 중 하나로 맞춰 주세요.
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="profile-card fade-up">
           <div className="profile-avatar-wrap">
@@ -132,6 +171,12 @@ export default function Profile() {
               <div className="profile-field">
                 <span className="profile-label">계정 ID</span>
                 <span className="profile-value">#{user.id}</span>
+              </div>
+              <div className="profile-field">
+                <span className="profile-label">역할</span>
+                <span className="profile-value">
+                  {roleNorm ?? (roleRaw ? `미인식 (${roleRaw})` : '없음')}
+                </span>
               </div>
               <button
                 className="btn btn-outline"

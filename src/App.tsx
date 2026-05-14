@@ -17,6 +17,9 @@ import Problems from './pages/Problems';
 import MockExams from './pages/MockExams';
 import MockExamSession from './pages/MockExamSession';
 import WrongNotes from './pages/WrongNotes';
+import AdminDashboard from './pages/AdminDashboard';
+import TeacherDashboard from './pages/TeacherDashboard';
+import { canAccessStaffRoute } from './utils/roles';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
@@ -26,6 +29,20 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     </div>
   );
   if (!user) return <Navigate to="/login" replace />;
+  return <>{children}</>;
+}
+
+function RoleRoute({ roles, children }: { roles: ('ADMIN' | 'TEACHER')[]; children: React.ReactNode }) {
+  const { user, isLoading } = useAuth();
+  if (isLoading) return (
+    <div style={{ display: 'flex', justifyContent: 'center', padding: '120px' }}>
+      <div className="spinner" />
+    </div>
+  );
+  if (!user) return <Navigate to="/login" replace />;
+  if (!canAccessStaffRoute(user, roles)) {
+    return <Navigate to="/" replace />;
+  }
   return <>{children}</>;
 }
 
@@ -53,6 +70,16 @@ function AppRoutes() {
           } />
           <Route path="/wrong-notes" element={
             <ProtectedRoute><WrongNotes /></ProtectedRoute>
+          } />
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <RoleRoute roles={['ADMIN']}><AdminDashboard /></RoleRoute>
+            </ProtectedRoute>
+          } />
+          <Route path="/teacher" element={
+            <ProtectedRoute>
+              <RoleRoute roles={['TEACHER']}><TeacherDashboard /></RoleRoute>
+            </ProtectedRoute>
           } />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

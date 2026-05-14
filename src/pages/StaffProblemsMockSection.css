@@ -1,0 +1,29 @@
+.staff-inline-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.staff-inline-form input,
+.staff-inline-form select {
+  padding: 10px 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-input);
+  font-size: 14px;
+}
+
+.cell-ellipsis {
+  max-width: 420px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .cell-ellipsis {
+    max-width: 200px;
+    white-space: normal;
+  }
+}

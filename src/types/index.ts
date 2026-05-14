@@ -26,12 +26,18 @@ export interface AutoLoginRequest {
   refreshToken: string;
 }
 
+export type UserRole = 'ADMIN' | 'TEACHER' | 'STUDENT';
+
 // User
 export interface MyProfileResponse {
   id: number;
   email: string;
   nickname: string;
   profileImage: string;
+  /** 서버가 문자열·다른 표기로 줄 수 있음 — `normalizeUserRole`로 해석 */
+  userRole?: UserRole | string;
+  /** 일부 API는 `role` 키만 사용 */
+  role?: string;
 }
 
 export interface ProfileResponse {
@@ -276,6 +282,40 @@ export interface ProblemSolveRequest {
 export interface ProblemSolveResponse {
   correct: boolean;
   explanation: string;
+}
+
+export interface ProblemCreateRequest {
+  certificateId: number;
+  content: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  correctAnswer: number;
+  explanation: string;
+}
+
+export interface ProblemUpdateRequest {
+  content: string;
+  option1: string;
+  option2: string;
+  option3: string;
+  option4: string;
+  correctAnswer: number;
+  explanation: string;
+}
+
+export interface IdOnlyResponse {
+  id: number;
+}
+
+export interface MockExamCreateRequest {
+  certificateId: number;
+  title: string;
+}
+
+export interface MockExamAddQuestionRequest {
+  problemId: number;
 }
 
 // MockExam

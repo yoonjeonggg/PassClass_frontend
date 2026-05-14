@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { notificationApi } from "../api";
 import type { NotificationResponse } from "../types";
+import { isAdmin, isTeacher } from "../utils/roles";
 import {
   IconBell, IconUser, IconBook, IconLogOut, IconChevronDown,
   IconMonitor, IconVideo, IconFileText
@@ -81,6 +82,8 @@ export default function Navbar() {
   };
 
   const isActive = (path: string) => location.pathname === path;
+  const staffAdminActive = location.pathname.startsWith("/admin");
+  const staffTeacherActive = location.pathname.startsWith("/teacher");
 
   return (
     <nav className="navbar">
@@ -100,9 +103,29 @@ export default function Navbar() {
           {user && (
             <Link to="/wrong-notes" className={`nav-link ${isActive("/wrong-notes") ? "active" : ""}`}>오답노트</Link>
           )}
+          {user && isAdmin(user) && (
+            <Link to="/admin" className={`nav-link ${staffAdminActive ? "active" : ""}`}>관리</Link>
+          )}
+          {user && isTeacher(user) && (
+            <Link to="/teacher" className={`nav-link ${staffTeacherActive ? "active" : ""}`}>강사</Link>
+          )}
         </div>
 
         <div className="navbar-actions">
+          {user && (isTeacher(user) || isAdmin(user)) && (
+            <div className="navbar-staff-mobile" aria-label="운영 메뉴">
+              {isTeacher(user) && (
+                <Link to="/teacher" className="navbar-staff-icon" title="강사 스튜디오">
+                  <IconVideo size={18} />
+                </Link>
+              )}
+              {isAdmin(user) && (
+                <Link to="/admin" className="navbar-staff-icon" title="관리자">
+                  <IconMonitor size={18} />
+                </Link>
+              )}
+            </div>
+          )}
           {user ? (
             <div className="navbar-user-area">
               <div className="notif-wrap" ref={notifRef}>
@@ -186,6 +209,16 @@ export default function Navbar() {
                     <Link to="/wrong-notes" className="dropdown-item" onClick={() => setMenuOpen(false)}>
                       <IconFileText size={15} /> 오답노트
                     </Link>
+                    {isAdmin(user) && (
+                      <Link to="/admin" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+                        <IconMonitor size={15} /> 관리자
+                      </Link>
+                    )}
+                    {isTeacher(user) && (
+                      <Link to="/teacher" className="dropdown-item" onClick={() => setMenuOpen(false)}>
+                        <IconVideo size={15} /> 강사 스튜디오
+                      </Link>
+                    )}
                     <div className="dropdown-divider" />
                     <button className="dropdown-item danger" onClick={handleLogout}>
                       <IconLogOut size={15} /> 로그아웃

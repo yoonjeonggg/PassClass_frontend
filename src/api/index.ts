@@ -14,7 +14,9 @@ import type {
   NotificationResponse, UnreadCountResponse, PageResponse,
   FileResponse,
   ProblemListItem, ProblemSolveRequest, ProblemSolveResponse,
+  ProblemCreateRequest, ProblemUpdateRequest, IdOnlyResponse,
   MockExamListItem, MockExamDetailResponse, MockExamSubmitRequest, MockExamSubmitResponse,
+  MockExamCreateRequest, MockExamAddQuestionRequest,
   WrongNoteResponse,
 } from '../types';
 
@@ -135,6 +137,12 @@ export const problemApi = {
     api.get<ApiResponse<ProblemListItem[]>>(`/api/problems?certificateId=${certificateId}`),
   solve: (problemId: number, data: ProblemSolveRequest) =>
     api.post<ApiResponse<ProblemSolveResponse>>(`/api/problems/${problemId}/solve`, data),
+  create: (data: ProblemCreateRequest) =>
+    api.post<ApiResponse<IdOnlyResponse>>('/api/problems', data),
+  update: (problemId: number, data: ProblemUpdateRequest) =>
+    api.put<ApiResponse<void>>(`/api/problems/${problemId}`, data),
+  delete: (problemId: number) =>
+    api.delete<ApiResponse<void>>(`/api/problems/${problemId}`),
 };
 
 // MockExam
@@ -147,6 +155,12 @@ export const mockExamApi = {
     api.post<ApiResponse<MockExamSubmitResponse>>(`/api/mock-exams/${mockExamId}/submit`, data),
   getResults: (mockExamId: number) =>
     api.get<ApiResponse<MockExamSubmitResponse>>(`/api/mock-exams/${mockExamId}/results`),
+  create: (data: MockExamCreateRequest) =>
+    api.post<ApiResponse<IdOnlyResponse>>('/api/mock-exams', data),
+  addQuestion: (mockExamId: number, data: MockExamAddQuestionRequest) =>
+    api.post<ApiResponse<void>>(`/api/mock-exams/${mockExamId}/questions`, data),
+  remove: (mockExamId: number) =>
+    api.delete<ApiResponse<void>>(`/api/mock-exams/${mockExamId}`),
 };
 
 // WrongNote

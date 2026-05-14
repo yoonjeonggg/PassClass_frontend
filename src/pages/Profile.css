@@ -4,6 +4,61 @@
   padding-bottom: 80px;
 }
 
+.profile-staff-banner {
+  max-width: 520px;
+  margin: 0 auto 20px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  border: 1px solid var(--orange-dim);
+  background: linear-gradient(135deg, #fffbf8 0%, #fff 100%);
+}
+
+.profile-staff-banner-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  margin-bottom: 6px;
+}
+
+.profile-staff-banner-desc {
+  font-size: 13px;
+  color: var(--gray-600);
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.profile-staff-banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.profile-role-hint {
+  max-width: 520px;
+  margin: 0 auto 20px;
+  padding: 16px 18px;
+  border-radius: var(--radius-sm);
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  font-size: 13px;
+  color: var(--gray-700);
+  line-height: 1.55;
+}
+
+.profile-role-hint code {
+  font-size: 12px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+}
+
+.profile-role-hint a {
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
 .profile-card {
   max-width: 520px;
   background: white;
